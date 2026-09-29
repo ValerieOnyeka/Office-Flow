@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Log in — OfficeFlow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-side">
+    <div class="brand"><span class="brand-mark"></span>OfficeFlow</div>
+    <div class="auth-quote">"Everything the office used to track on paper and WhatsApp, now in one shared view."
+      <span>— Prototype concept for a Digital Skills &amp; Office Management study project</span>
+    </div>
+    <div style="font-size:12px; opacity:.55;">Organize. Collaborate. Get things done.</div>
+  </div>
+  <div class="auth-form-wrap">
+    <div class="auth-form">
+      <h2>Welcome back</h2>
+      <p class="sub">Choose a role to preview OfficeFlow as that user.</p>
+      <div class="role-picker" id="rolePicker">
+        <div class="role-opt active" data-role="employee">Employee</div>
+        <div class="role-opt" data-role="manager">Manager</div>
+        <div class="role-opt" data-role="admin">Admin</div>
+      </div>
+      <div class="field" id="emailField">
+        <label>Email</label>
+        <input type="email" id="loginEmail" value="valerie@officeflow.demo">
+        <div class="err">Enter a valid email address.</div>
+      </div>
+      <div class="field" id="passField">
+        <label>Password</label>
+        <input type="password" id="loginPass" value="••••••••">
+        <div class="err">Password must be at least 6 characters.</div>
+      </div>
+      <button class="btn btn-primary btn-block" onclick="handleLogin()">Log in</button>
+      <small class="hint">This is a UI prototype — login is simulated locally, no data leaves this page.</small>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+<script>
+let selectedRole = 'employee';
+document.getElementById('rolePicker').addEventListener('click', e=>{
+  const opt = e.target.closest('.role-opt'); if(!opt) return;
+  document.querySelectorAll('.role-opt').forEach(o=>o.classList.remove('active'));
+  opt.classList.add('active');
+  selectedRole = opt.dataset.role;
+});
+
+function handleLogin(){
+  const emailField = document.getElementById('emailField');
+  const passField = document.getElementById('passField');
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const emailOk = /\S+@\S+\.\S+/.test(email);
+  const passOk = pass.length >= 6;
+  emailField.classList.toggle('invalid', !emailOk);
+  passField.classList.toggle('invalid', !passOk);
+  if(!emailOk || !passOk) return;
+
+  startSession(selectedRole);
+  toast('Welcome back');
+  setTimeout(()=>{
+    window.location.href = (selectedRole==='employee') ? 'dashboard.html' : 'admin-dashboard.html';
+  }, 350);
+}
+
+applyStoredTheme();
+</script>
+</body>
+</html>

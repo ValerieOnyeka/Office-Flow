@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Employees — OfficeFlow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="employees">
+<div class="app-shell">
+  <div class="sidebar-scrim" id="scrim" onclick="toggleSidebar(false)"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-mark"></span>OfficeFlow</div>
+
+    <div class="nav-label">Workspace</div>
+    <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="ic">◱</span>Dashboard</a>
+    <a class="nav-item" data-page="tasks" href="tasks.html"><span class="ic">☑</span>My Tasks</a>
+    <a class="nav-item" data-page="requests" href="requests.html"><span class="ic">⚑</span>Requests<span class="nav-badge">2</span></a>
+    <a class="nav-item" data-page="calendar" href="calendar.html"><span class="ic">◷</span>Calendar</a>
+    <a class="nav-item" data-page="announcements" href="announcements.html"><span class="ic">📣</span>Announcements</a>
+    <a class="nav-item" data-page="directory" href="directory.html"><span class="ic">👥</span>Directory</a>
+    <a class="nav-item" data-page="profile" href="profile.html"><span class="ic">◍</span>My Profile</a>
+
+    <div class="nav-label admin-only">Admin</div>
+    <a class="nav-item admin-only" data-page="admin-dashboard" href="admin-dashboard.html"><span class="ic">▦</span>Office Overview</a>
+    <a class="nav-item admin-only" data-page="employees" href="employees.html"><span class="ic">🧑‍💼</span>Employees</a>
+    <a class="nav-item admin-only" data-page="inventory" href="inventory.html"><span class="ic">📦</span>Inventory</a>
+    <a class="nav-item admin-only" data-page="reports" href="reports.html"><span class="ic">▤</span>Reports</a>
+    <a class="nav-item admin-only" data-page="settings" href="settings.html"><span class="ic">⚙</span>Settings</a>
+
+    <div class="sidebar-foot">
+      <a class="nav-item" href="#" onclick="logout(); return false;"><span class="ic">⏻</span>Log out</a>
+    </div>
+  </aside>
+
+  <div class="main-col">
+    <div class="topbar">
+      <button class="icon-btn hamburger" onclick="toggleSidebar(true)">☰</button>
+      <div class="topbar-search"><span class="ic">⌕</span><input id="globalSearch" placeholder="Search tasks, requests, people..."></div>
+      <div class="topbar-actions">
+        <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle dark mode">☾</button>
+        <button class="icon-btn" onclick="toggleNotif()" title="Notifications">🔔<span class="dot-flag"></span></button>
+        <a class="user-chip" href="profile.html">
+          <div class="avatar" id="userAvatar">--</div>
+          <div class="meta"><b id="userName">...</b><span id="userRoleLabel">...</span></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="content" id="content"></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop"><div class="modal" id="modalBody"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+<script>initAppShell();</script>
+</body>
+</html>
